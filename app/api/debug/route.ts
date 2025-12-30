@@ -3,6 +3,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { error } from "console";
 import { NextRequest, NextResponse } from "next/server";
 
+export const runtime = "edge";
 const apiKey = process.env.GEMINI_API_KEY;
 if(!apiKey){
     throw new Error("GEMINI API Key is not set in environment variables")
@@ -15,7 +16,12 @@ export const POST = async(req:NextRequest) => {
      if(!code){
         return NextResponse.json({error: "Code is required"}, {status:400})
      }
-     const model = genAI.getGenerativeModel({model: "gemini-2.5-flash"})
+     const model = genAI.getGenerativeModel({model: "gemini-2.5-flash",
+      //  generationConfig: {
+      //    maxOutputTokens:300,
+      //    // temperature: 0.4
+      // }
+     })
      let prompt= `Please debug the following code: \n\n${code}\n\n`;
      if(errorMessage){
         prompt += `The error I am getting is : ${errorMessage}\n\n`
