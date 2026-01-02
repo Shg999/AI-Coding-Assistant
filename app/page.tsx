@@ -7,7 +7,6 @@ import Header from "@/src/components/Header";
 import HistoryPanel from "@/src/components/HistoryPanel";
 import Tabs from '@/src/data/Tabs'
 import { HistoryItem, Tab } from "@/src/types";
-import Image from "next/image";
 import { useState } from "react";
 
 export default function Home() {

@@ -35,7 +35,7 @@ function CodeDebugging({addToHistory}: CodeDebuggingProps) {
       } else{
         setDebugging(`Error: ${data.error}`)
       }
-     } catch (error) {
+     } catch {
          setDebugging("Failed to fetch debugging suggestions. Please try again")
      }
      finally{

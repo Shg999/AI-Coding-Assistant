@@ -1,6 +1,5 @@
 import { DebugRequest } from "@/src/types";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { error } from "console";
 import { NextRequest, NextResponse } from "next/server";
 
 export const runtime = "edge";
@@ -32,8 +31,7 @@ export const POST = async(req:NextRequest) => {
      const debugging=response.text()
 
      return NextResponse.json({data: {debugging}},{status:200});
-   } catch (error) {
-      console.error("Error:", error)
+   } catch {
       return NextResponse.json({error: "Failed to debugging suggestion"}, {status:500})
    }
 }

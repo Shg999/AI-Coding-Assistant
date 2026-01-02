@@ -15,9 +15,8 @@ export const POST = async(req:NextRequest) => {
      if(!description){
         return NextResponse.json({error: "description is required"}, {status:400})
      }
-     const model = genAI.getGenerativeModel({model: "gemini-2.5-flash"
-     })
-     let prompt= `Generate ${language || "Javascript"} code for : ${description} \n\nCode `;
+     const model = genAI.getGenerativeModel({model: "gemini-2.5-flash"})
+     const prompt= `Generate ${language || "Javascript"} code for : ${description} \n\nCode `;
    
      const result = await model.generateContent(prompt)
      const response = await result.response;

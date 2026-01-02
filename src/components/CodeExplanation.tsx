@@ -34,7 +34,7 @@ function CodeExplanation({addToHistory}: CodeExplanationProps) {
       } else{
         setExplanation(`Error: ${data.error}`)
       }
-     } catch (error) {
+     } catch {
          setExplanation("Failed to fetch explanation. Please try again")
      }
      finally{
