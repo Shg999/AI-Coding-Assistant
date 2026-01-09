@@ -7,11 +7,23 @@ import Header from "@/src/components/Header";
 import HistoryPanel from "@/src/components/HistoryPanel";
 import Tabs from '@/src/data/Tabs'
 import { HistoryItem, Tab } from "@/src/types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
+const HISTORY_STORAGE_KEY = "ai_recent_history";
 export default function Home() {
   const [active, setActive] = useState<Tab["id"]>("explain")
   const [history, setHistory] = useState<HistoryItem[]>([])
+
+useEffect(() => {
+   const stored = localStorage.getItem(HISTORY_STORAGE_KEY)
+   if(stored) {
+      setHistory(JSON.parse(stored))
+   }
+}, [])
+
+useEffect(() => {
+  localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(history))
+},[history])
 
   const addToHistory = (
     type: HistoryItem["type"],
@@ -25,7 +37,7 @@ export default function Home() {
       input,
       output
     }
-    setHistory((prev) => [newItem, ...prev.slice(0, 9)])
+    setHistory((prev) => [newItem, ...prev].slice(0, 10))
   }
   return (
     <div className="bg-black min-h-screen">
